@@ -1,65 +1,46 @@
-import ftplib
-import io
-import json
-import pandas
-import requests
-import requests_html
-import yahoo_fin.stock_info as si
-import yfinance as yf
-from technical_indicators_lib import MACD, RSI, MOM, OBV
+"""" 
+Hopper Stocks:
+
+A Twitter Bot that tweets
+information about the top
+5 most active stocks on 
+the market. This bot tweets 
+every 30 minutes while the 
+market is open.
+
+By Jack Ribarich
+
+Date Created: August 26th, 2020
+"""
+
+import stock_data as sd
 
 
-most_active = si.get_day_most_active()
-print(most_active[:5])
+def active_list():
+	stocks = sd.most_active()
+
+	for stock in stocks:
+		df = sd.get_df(stock.ticker)
+
+		stock.EMA_20 = sd.get_EMA(df, 20)
+		stock.EMA_50 = sd.get_EMA(df, 50)
+		stock.EMA_100 = sd.get_EMA(df, 100)
+
+		stock.RSI = sd.get_RSI(df)
+
+		stock.OBV = sd.get_OBV(df)
+
+	return stocks
+	
+	
+def main():
+	# gather stock data into a list
+	# of stock instances
+	stocks = active_list()
+	# put each stock into a class
+
+	# tweet info on each stock
 
 
-tickers = [most_active['Symbol'][x] for x in range(5)]
-company = [most_active['Name'][x] for x in range(5)]
-prices = [most_active['Price (Intraday)'][x] for x in range(5)]
-per_change = [most_active['% Change'][x] for x in range(5)]
-
-
-print(company)
-print(tickers)
-print(prices)
-print(per_change)
-
-
-# Now that we have tickers, lets get the data from yfinance of just one company
-#using Yfinance cause it has smaller time scale
-
-aapl = yf.download(tickers = tickers[0], period = '1d', interval = '1m')
-
-print(aapl)
-
-
-# # MACD Test
-df = aapl
-df.columns = df.columns.str.lower()  # have to make columns lowercase
-macd = MACD()
-macd_df = macd.get_value_df(df, 12, 26, True, 9)
-
-
-# RSI Test
-
-rsi = RSI()
-new = df[['close']].fillna(0)  # fill NAN works for some reason
-rsi_df = rsi.get_value_df(new, 14)
-
-print(rsi_df)
-
-
-# OBV Test
-obv = OBV()  # obv
-obv_df = obv.get_value_df(df)
-
-print(obv_df)
-
-
-
-#MOM Test
-
-mom = MOM()  # obv
-mom_df = mom.get_value_df(new)
-
-print(mom_df)
+if __name__ == "__main__":
+	main()
