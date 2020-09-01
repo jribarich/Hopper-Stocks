@@ -14,32 +14,67 @@ Date Created: August 26th, 2020
 """
 
 import stock_data as sd
+import datetime
+import twitter
+
+
+def convert_time():
+	t_zone = 3  # pacific to eastern 
+
+	now = datetime.datetime.now()
+	hour = now.hour + t_zone
+	minute = now.minute + t_zone
+
+	# 9:30 EST = 0 -> 4:00 EST = 390
+	new_h = (hour-9)*60 - 30
+	return new_h + minute
 
 
 def active_list():
+	# time = datetime.datetime.now()
+	now = convert_time()
+	past = now - 30
+	
+	if now == 390:
+		now = 389
+
 	stocks = sd.most_active()
 
 	for stock in stocks:
 		df = sd.get_df(stock.ticker)
 
-		stock.EMA_20 = sd.get_EMA(df, 20)
-		stock.EMA_50 = sd.get_EMA(df, 50)
-		stock.EMA_100 = sd.get_EMA(df, 100)
+		stock.EMA_20 = sd.get_EMA(df, 20, now)
+		stock.EMA_50 = sd.get_EMA(df, 50, now)
+		stock.EMA_100 = sd.get_EMA(df, 100, now)
 
-		stock.RSI = sd.get_RSI(df)
+		stock.RSI = sd.get_RSI(df, now, past)
 
-		stock.OBV = sd.get_OBV(df)
+		stock.OBV = sd.get_OBV(df, now, past)
 
 	return stocks
-	
-	
+
+
+def init_twitter():
+	api = twitter.Api(consumer_key= c_key,
+                      consumer_secret= c_secret,
+                      access_token_key= t_key,
+                      access_token_secret= t_secret)
+
+	return api
+
+
 def main():
-	# gather stock data into a list
-	# of stock instances
+	# gather stock data into stock class
+	# put into list
 	stocks = active_list()
-	# put each stock into a class
+
+	# initialize twitter w/ API keys
+	api = init_twitter()
 
 	# tweet info on each stock
+	for i in range(4, -1, -1):
+		status = api.PostUpdate(repr(stocks[i]))
+		print(status.text)
 
 
 if __name__ == "__main__":
