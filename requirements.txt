@@ -1,9 +1,8 @@
-requests==2.24.0
 numpy==1.18.5
-~andas==1.1.0
 pandas==1.1.1
-python_twitter==3.5
 requests_html==0.10.0
 technical_indicators_lib==0.0.2
-yahoo_fin==0.8.6
 yfinance==0.1.54
+yahoo_fin==0.8.6
+python_twitter==3.5
+requests==2.24.0
