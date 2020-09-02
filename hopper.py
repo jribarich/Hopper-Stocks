@@ -17,6 +17,11 @@ import stock_data as sd
 import datetime
 import twitter
 
+c_key = 'VicNEvNsn1I4qiT20cEl5XBTO'
+c_secret = 'EABMHc5bsZuZ34qRnYAeVjaoyy6tdOk7OBNpgsLfzNlTXeuDKl'
+t_key = '1284581934572597250-3ZCKTB7D1QuieXVmFWEzmVyQa73XWX'
+t_secret = 'kIaJpuvI8P8lcfVvqTo8DnJygdhNxbRL4GqcQAF0z6dcB'
+
 
 def convert_time():
 	t_zone = 3  # pacific to eastern 
@@ -34,7 +39,7 @@ def active_list():
 	# time = datetime.datetime.now()
 	now = convert_time()
 	past = now - 30
-	
+
 	if now == 390:
 		now = 389
 
