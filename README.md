@@ -21,7 +21,7 @@ You will have to sign up for a Developer
 Account on Twitter and then use your unique keys
 in the init\_twitter function. 
 
-```python
+```bash
 python hopper.py
 ```
 
