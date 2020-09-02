@@ -28,7 +28,7 @@ def convert_time():
 
 	now = datetime.datetime.now()
 	hour = now.hour + t_zone
-	minute = now.minute + t_zone
+	minute = now.minute - 1 # for indices starting at 0
 
 	# 9:30 EST = 0 -> 4:00 EST = 390
 	new_h = (hour-9)*60 - 30
@@ -36,12 +36,8 @@ def convert_time():
 
 
 def active_list():
-	# time = datetime.datetime.now()
 	now = convert_time()
 	past = now - 30
-
-	if now == 390:
-		now = 389
 
 	stocks = sd.most_active()
 
