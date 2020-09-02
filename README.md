@@ -11,9 +11,9 @@ Clone the repository into a local repository
 Use the package manager pip to install the
 requirements.txt file. 
 
-'''bash
+```bash
 pip install -r requirements.txt
-'''
+```
 
 ## Usage
 
@@ -21,9 +21,9 @@ You will have to sign up for a Developer
 Account on Twitter and then use your unique keys
 in the init\_twitter function. 
 
-'''python
+```python
 python hopper.py
-'''
+```
 
 ## Author
 
