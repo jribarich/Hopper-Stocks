@@ -1,5 +1,7 @@
 # Hopper Stocks
 
+Follow the project on Twitter @Hopper_Stocks
+
 Hopper Stocks is a Twitter bot designed to tweet
 the prices and indicators of the 5 most active
 stocks trading when the stock market is open. Data
