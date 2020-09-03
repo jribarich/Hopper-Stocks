@@ -32,12 +32,13 @@ def convert_time():
 
 	# 9:30 EST = 0 -> 4:00 EST = 390
 	new_h = (hour-9)*60 - 30
+
 	return new_h + minute
 
 
 def active_list():
 	now = convert_time()
-	past = now - 30
+	past = now - 29  # for indices starting at 0
 
 	stocks = sd.most_active()
 
