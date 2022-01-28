@@ -16,11 +16,7 @@ Date Created: August 26th, 2020
 import stock_data as sd
 import datetime
 import twitter
-
-c_key = 'VicNEvNsn1I4qiT20cEl5XBTO'
-c_secret = 'EABMHc5bsZuZ34qRnYAeVjaoyy6tdOk7OBNpgsLfzNlTXeuDKl'
-t_key = '1284581934572597250-3ZCKTB7D1QuieXVmFWEzmVyQa73XWX'
-t_secret = 'kIaJpuvI8P8lcfVvqTo8DnJygdhNxbRL4GqcQAF0z6dcB'
+from keys import c_key, c_secret, t_key, t_secret
 
 
 def convert_time():

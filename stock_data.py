@@ -1,10 +1,4 @@
-import ftplib
-import io
-import json
-import pandas
 import numpy as np
-import requests
-import requests_html
 import yahoo_fin.stock_info as si
 import yfinance as yf
 from technical_indicators_lib import EMA, RSI, OBV
